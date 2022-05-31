@@ -22,7 +22,7 @@
 
     const { data } = await useFetchYT("search?" + new URLSearchParams({
         part: "snippet",
-        q: route.query.search_query,
+        q: String(route.query.search_query),
         maxResults: "50",
         key: import.meta.env.VITE_YT_API_KEY
     })).get().json();

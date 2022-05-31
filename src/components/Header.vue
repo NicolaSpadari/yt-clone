@@ -20,6 +20,7 @@
                         rounded-lg
                         type="text"
                         placeholder="Search"
+                        spellcheck="false"
                         @keyup.enter="search()"
                     >
 
@@ -27,9 +28,20 @@
                 </div>
             </div>
             <div flex p-2 items-center justify-end sm="space-x-3 px-4" lg="w-1/4">
-                <Btn>
-                    Sign in
-                </Btn>
+                <button v-if="!signedIn" inline-flex items-center px-5 py-3 text-blue-500 border border-blue-500 rounded hover:bg-blue-500 hover:text-white active:bg-blue-500 focus:outline-none focus:ring space-x-2 @click="login()">
+                    <span text-sm uppercase>
+                        Sign in
+                    </span>
+
+                    <i-heroicons-solid-user-circle w-5 h-5 />
+                </button>
+                <button v-else inline-flex items-center px-5 py-3 text-blue-500 border border-blue-500 rounded hover:bg-blue-500 hover:text-white active:bg-blue-500 focus:outline-none focus:ring space-x-2 @click="logout()">
+                    <span text-sm>
+                        {{ user.user.displayName }}
+                    </span>
+
+                    <i-heroicons-solid-logout w-5 h-5 />
+                </button>
             </div>
         </div>
     </div>
@@ -40,6 +52,7 @@
     const scrolled = ref(0);
     const throttledScroll = refThrottled(scrolled, 500);
     const { toggleSidebar } = useSidebar();
+    const { user, login, logout, signedIn } = useUser();
     const router = useRouter();
     const searchTerm = ref("");
 

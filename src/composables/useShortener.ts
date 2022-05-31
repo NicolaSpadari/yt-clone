@@ -1,9 +1,14 @@
-const useShortener = (text: string, len = 50) => {
-    if (text.length >= len) {
-        return text.slice(0, len) + "...";
-    }
+const useShortener = () => {
+    const shorten = (text: string, len = 50) => {
+        if (text.length >= len) {
+            return text.slice(0, len) + "...";
+        }
 
-    return text;
+        return text;
+    };
+    return {
+        shorten
+    };
 };
 
 export { useShortener };

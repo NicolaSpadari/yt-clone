@@ -32,7 +32,13 @@ export default defineConfig({
                 "vue",
                 "vue-router",
                 "@vueuse/core",
-                "@vueuse/head"
+                "@vueuse/head",
+                {
+                    "@/firebase": ["auth"],
+                    "firebase/app": ["initializeApp"],
+                    "firebase/auth": ["GoogleAuthProvider", "signInWithPopup", "getAuth"],
+                    "date-fns": ["formatDistanceToNow", "intervalToDuration", "parseISO"]
+                }
             ],
             resolvers: [dirResolver()]
         })

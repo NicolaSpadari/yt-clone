@@ -1,10 +1,10 @@
 const state = reactive({
-    open: false
+    isOpen: false
 });
 
 const useSidebar = () => {
     const toggleSidebar = () => {
-        state.open = !state.open;
+        state.isOpen = !state.isOpen;
     };
 
     return {

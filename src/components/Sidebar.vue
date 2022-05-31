@@ -1,14 +1,20 @@
 <template>
-    <aside h-screen overflow-auto fixed top-0 bg-white z-20 divide-y divide-gray-200 :class="{ 'w-64': open }">
+    <aside h-screen overflow-auto fixed top-0 bg-white z-20 divide-y divide-gray-200 :class="{ 'w-64': isOpen }">
         <div pt-25>
             <Navigation :entries="firstEntries" />
+
+            <Suspense>
+                <UserSubscriptions v-if="signedIn" />
+            </Suspense>
+
             <Navigation :entries="secondEntries" />
         </div>
     </aside>
 </template>
 
 <script lang="ts" setup>
-    const { open } = useSidebar();
+    const { isOpen } = useSidebar();
+    const { signedIn } = useUser();
 
     const firstEntries = [
         {

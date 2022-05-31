@@ -2,7 +2,7 @@
     <Header />
     <Sidebar />
 
-    <main px-5 pb-5 pt-27 :class="open ? 'ml-64' : 'ml-14'">
+    <main px-5 pb-5 pt-27 :class="isOpen ? 'ml-64' : 'ml-14'">
         <router-view v-slot="{ Component }">
             <Suspense>
                 <component :is="Component" />
@@ -12,12 +12,12 @@
 </template>
 
 <script lang="ts" setup>
-    const { open } = useSidebar();
+    const { isOpen } = useSidebar();
 </script>
 
 <style lang="scss">
     :root{
-        --plyr-color-main: #ef4444;
+        --plyr-color-main: theme("colors.red.500");
     }
     html {
         -webkit-tap-highlight-color: transparent;
@@ -32,5 +32,15 @@
     }
     container {
         @apply mx-auto;
+    }
+
+    .fade-enter-active,
+    .fade-leave-active {
+        @apply transition-opacity ease duration-500;
+    }
+
+    .fade-enter-from,
+    .fade-leave-to {
+        @apply opacity-0;
     }
 </style>

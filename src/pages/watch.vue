@@ -35,7 +35,7 @@
 
     const { data } = await useFetchYT("videos?" + new URLSearchParams({
         part: "id,snippet",
-        id: route.query.v,
+        id: String(route.query.v),
         key: import.meta.env.VITE_YT_API_KEY
     })).get().json();
 

@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import { createHead } from "@vueuse/head";
+import { LazyLoad } from "@/directives/lazyload";
 import { router } from "@/router";
 import App from "@/App.vue";
 import VuePlyr from "vue-plyr";
@@ -13,6 +14,7 @@ const app = createApp(App);
 app.use(head);
 app.use(router);
 app.use(VuePlyr);
+app.directive("lazyload", LazyLoad);
 
 router.isReady().then(() => {
     app.mount("#app");
