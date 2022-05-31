@@ -1,0 +1,58 @@
+<template>
+    <div fixed w-full z-30 transition-shadow duration-300 :class="{ 'shadow-lg': throttledScroll > 0 }">
+        <div flex justify-between w-full bg-white bg-opacity-60 backdrop-filter backdrop-blur>
+            <div flex space-x-6 lg="w-1/4">
+                <div flex items-center pl-4 space-x-3 xl="w-64 bg-white">
+                    <button i-heroicons-outline-menu w-6 h-6 focus="outline-none" @click="toggleSidebar()" />
+                    <RouterLink to="/">
+                        <Logo w-20 />
+                    </RouterLink>
+                </div>
+            </div>
+            <div hidden sm="flex" items-center justify-end p-2.5 pl-8 md="pl-12 px-8" flex-1 lg="w-1/2 px-0" max-w-screen-md>
+                <div relative flex-1>
+                    <label sr-only for="search"> Search </label>
+
+                    <input
+                        id="search"
+                        v-model="searchTerm"
+                        w-full py-2 pl-3 pr-16 text-sm border-1 border-gray-200
+                        rounded-lg
+                        type="text"
+                        placeholder="Search"
+                        @keyup.enter="search()"
+                    >
+
+                    <button i-heroicons-outline-search absolute p-2 text-white translate-y="-1/2" bg-blue-600 rounded-full top="1/2" right-4 type="button" />
+                </div>
+            </div>
+            <div flex p-2 items-center justify-end sm="space-x-3 px-4" lg="w-1/4">
+                <Btn>
+                    Sign in
+                </Btn>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script lang="ts" setup>
+    const { y } = useWindowScroll();
+    const scrolled = ref(0);
+    const throttledScroll = refThrottled(scrolled, 500);
+    const { toggleSidebar } = useSidebar();
+    const router = useRouter();
+    const searchTerm = ref("");
+
+    const search = () => {
+        router.push({
+            path: "/search",
+            query: {
+                search_query: searchTerm.value
+            }
+        });
+    };
+
+    watch(y, () => {
+        scrolled.value = y.value;
+    });
+</script>
