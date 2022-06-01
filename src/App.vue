@@ -9,6 +9,8 @@
             </Suspense>
         </router-view>
     </main>
+
+    <Alert />
 </template>
 
 <script lang="ts" setup>

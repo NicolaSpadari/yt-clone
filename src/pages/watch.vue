@@ -15,10 +15,25 @@
 
         <div container space-y-10>
             <div flex justify-between>
-                <p font-bold text-2xl border-l-4 border-gray-400 pl-4 py-2>
-                    {{ video.snippet.title }}
-                </p>
-                <div flex space-x-5>
+                <div border-l-4 border-gray-400 pl-4 py-2 space-y-1>
+                    <div flex space-x-4 items-center>
+                        <RouterLink :to="`/channel/${channel.id}`">
+                            <img v-lazyload rounded-full :data-src="channel.snippet.thumbnails.default.url" :alt="channel.brandingSettings.channel.title" w-16 h-16>
+                        </RouterLink>
+                        <div>
+                            <RouterLink :to="`/channel/${channel.id}`" font-medium text-base>
+                                {{ channel.brandingSettings.channel.title }}
+                            </RouterLink>
+                            <p font-bold text-2xl>
+                                {{ video.snippet.title }}
+                            </p>
+                            <p text-sm text-gray-600>
+                                Published on {{ getPublishDate(video.snippet.publishedAt) }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div flex space-x-5 pr-10>
                     <div flex items-center space-x-2>
                         <i-heroicons-outline-thumb-up w-5 h-5 text-gray-600 />
                         <p text-sm text-gray-500 font-semibold>
@@ -32,17 +47,17 @@
                             {{ dotNumber(dislikes) }}
                         </p>
                     </div>
+
+                    <div flex items-center>
+                        <button @click="shareVideo($route.query.v);showAlert('Url copied')">
+                            <i-heroicons-outline-share w-5 h-5 text-gray-600 />
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <div class="rich-text">
                 <p max-w-4xl text-sm text-dark-600 v-html="enrichText(video.snippet.description)" />
-            </div>
-
-            <div flex space-x-5>
-                <RouterLink v-for="hashtag in video.snippet.tags" :key="hashtag" :to="`/search?search_query=${hashtag}`" text-blue-600 text-sm>
-                    #{{ hashtag }}
-                </RouterLink>
             </div>
         </div>
 
@@ -54,9 +69,11 @@
 
 <script lang="ts" setup>
     const route = useRoute();
-    const { enrichText, dotNumber } = useUtils();
+    const { showAlert } = useAlert();
+    const { enrichText, dotNumber, shareVideo, getPublishDate } = useUtils();
     const { getDislikes } = useYoutube();
     const video = ref();
+    const channel = ref();
     const plyr = ref<HTMLElement | null>(null);
     const player = ref();
     const dislikes = ref(0);
@@ -77,6 +94,13 @@
     video.value = data.value.items[0];
 
     dislikes.value = await getDislikes(String(route.query.v), Number(video.value.statistics.likeCount));
+
+    const { data: channelData } = await useFetchYT("channels?" + new URLSearchParams({
+        part: "brandingSettings,id,snippet,statistics,contentDetails",
+        id: video.value.snippet.channelId,
+        key: import.meta.env.VITE_YT_API_KEY
+    })).get().json();
+    channel.value = channelData.value.items[0];
 
     useHead({
         title: video.value.title

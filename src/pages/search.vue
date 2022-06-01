@@ -1,19 +1,11 @@
 <template>
-    <container>
-        <p>Results for: <span font-bold italic>{{ $route.query.search_query }}</span></p>
+    <div container pt-80px>
+        <p text-dark-800 text-xl mt-10>Results for: <span font-bold italic>{{ $route.query.search_query }}</span></p>
 
         <div mt-10>
-            <ul>
-                <li v-for="video in videos" :key="video.id.videoId" mb-5>
-                    <RouterLink :to="`/watch?v=${video.id.videoId}`">
-                        {{ video.snippet.title }}
-                    </RouterLink>
-                </li>
-            </ul>
+            <VideoItemHorizontal v-for="video in videos" :key="video.id.videoId" :data="video" />
         </div>
-
-        <!-- <pre>{{ videos }}</pre> -->
-    </container>
+    </div>
 </template>
 
 <script lang="ts" setup>

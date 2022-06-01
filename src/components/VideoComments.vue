@@ -4,7 +4,7 @@
             Comments <span text-base text-gray-600>({{ dotNumber(props.count) }})</span>
         </p>
 
-        <div ref="container" max-h-screen scrollbar="~ w-0" space-y-7 pb-10>
+        <div ref="container" container scrollbar="~ rounded" bg-gray-50 rounded-lg space-y-7 p-5>
             <div v-for="comment in comments" :key="comment.id">
                 <div flex items-start space-x-3>
                     <RouterLink :to="`/channel/${comment.snippet.topLevelComment.snippet.authorChannelId.value}`">

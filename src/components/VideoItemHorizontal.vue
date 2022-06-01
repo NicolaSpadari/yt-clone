@@ -1,32 +1,38 @@
 <template>
-    <RouterLink :to="`/watch?v=${props.data.id.videoId}`" class="group" mb-7>
-        <div relative>
+    <div flex space-x-5 mb-7>
+        <RouterLink :to="`/watch?v=${props.data.id.videoId}`" class="group">
             <img v-lazyload :data-src="props.data.snippet.thumbnails.medium.url" :title="props.data.snippet.title" rounded-md w-full>
-            <!-- <span bg-black rounded-md font-semibold m-1 text-white text-xs opacity-100 py-1 px-2 right-0 bottom-0 duration-500 absolute class="group-hover:opacity-0">
-                0:00
-            </span> -->
-        </div>
-        <div flex mt-3 items-start>
-            <div text-sm space-y-1>
-                <p font-semibold text-gray-800>
-                    {{ escape(shorten(props.data.snippet.title, 60)) }}
-                </p>
-                <div>{{ getReadableDate(props.data.snippet.publishedAt) }} ago</div>
+        </RouterLink>
+        <div mt-3>
+            <div text-sm space-y-2>
+                <RouterLink :to="`/watch?v=${props.data.id}`" font-semibold text-gray-800>
+                    {{ shorten(props.data.snippet.title, 60) }}
+                </RouterLink>
+                <RouterLink :to="`/channel/${props.data.snippet.channelId}`" flex mt-1>
+                    <div relative>
+                        <div flex h-full items-center space-x-1>
+                            <i-heroicons-solid-desktop-computer w-5 h-5 text-red-500 />
+                            <span>{{ props.data.snippet.channelTitle }}</span>
+                        </div>
+                    </div>
+                </RouterLink>
+                <div>Published {{ getReadableDate(props.data.snippet.publishedAt) }} ago</div>
             </div>
+
+            <p text-sm text-dark-400 max-w-xl mt-5>
+                {{ props.data.snippet.description }}
+            </p>
         </div>
-    </RouterLink>
+    </div>
 </template>
 
 <script lang="ts" setup>
     const props = defineProps({
-        data: Object
+        data: Object,
+        channelThumbnail: String
     });
 
-    const { formatNumber, shorten, escape } = useUtils();
-
-    const getReadableDate = (dateISO: string) => {
-        return formatDistanceToNow(parseISO(dateISO)).replace("about ", "");
-    };
+    const { formatNumber, shorten, getReadableDate } = useUtils();
 
     const getVideoDuration = (durationISO: string) => {
         let match = durationISO.match(/PT(\d+H)?(\d+M)?(\d+S)?/);

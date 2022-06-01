@@ -42,7 +42,7 @@ export default defineConfig({
                     "@/firebase": ["auth"],
                     "firebase/app": ["initializeApp"],
                     "firebase/auth": ["GoogleAuthProvider", "signInWithPopup", "getAuth"],
-                    "date-fns": ["formatDistanceToNow", "intervalToDuration", "parseISO"]
+                    "date-fns": ["formatDistanceToNow", "intervalToDuration", "parseISO", "format"]
                 }
             ],
             resolvers: [dirResolver()]

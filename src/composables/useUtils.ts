@@ -10,7 +10,11 @@ const useUtils = () => {
 
     const dotNumber = (number: string | number) => {
         return Number(number).toLocaleString();
-    }
+    };
+
+    const getPublishDate = (date: string) => {
+        return format(parseISO(date), "dd MMMM yyyy");
+    };
 
     const shorten = (text: string, len = 50) => {
         if (text.length >= len) {
@@ -31,13 +35,19 @@ const useUtils = () => {
         return text.replace(/\n/g, "<br>").replace(URLMatcher, (match: any) => `<a href="${match}" target="_blank">${match}</a>`);
     };
 
+    const shareVideo = (videoId: string) => {
+        navigator.clipboard.writeText(`https://www.youtube.com/watch?v=${videoId}`);
+    };
+
     return {
         getReadableDate,
         formatNumber,
         dotNumber,
         shorten,
         escape,
-        enrichText
+        enrichText,
+        shareVideo,
+        getPublishDate
     };
 };
 
