@@ -5,14 +5,16 @@
 </route>
 
 <template>
-    <div ref="container" pt-80px max-h-screen scrollbar="~ thumb-color-zinc-400 rounded" container grid gap-4 px-5 sm="grid-cols-2" lg="grid-cols-3" xl="grid-cols-4" xxl="grid-cols-5" uw="grid-cols-6">
-        <template v-if="loading">
-            Loading...
-        </template>
+    <div ref="container" pt-80px max-h-screen scrollbar="~ thumb-color-zinc-400 rounded">
+        <div container grid gap-4 px-5 sm="grid-cols-2" lg="grid-cols-3" xl="grid-cols-4" xxl="grid-cols-5" uw="grid-cols-6">
+            <template v-if="loading">
+                Loading...
+            </template>
 
-        <template v-else>
-            <VideoItem v-for="vid in videos" :key="vid.id" :data="vid" :channel-thumbnail="getChannelThumbnail(vid.id)" />
-        </template>
+            <template v-else>
+                <VideoItem v-for="vid in videos" :key="vid.id" :data="vid" :channel-thumbnail="getChannelThumbnail(vid.id)" />
+            </template>
+        </div>
     </div>
 </template>
 
