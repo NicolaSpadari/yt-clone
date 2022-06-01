@@ -1,6 +1,6 @@
 <template>
-    <aside h-screen overflow-auto fixed top-0 bg-white z-20 divide-y divide-gray-200 :class="{ 'w-64': isOpen }">
-        <div pt-25>
+    <aside shadow-lg scrollbar="~ rounded" h-screen overflow-auto fixed top-0 bg-white z-20 divide-y divide-gray-200 :class="{ 'w-64': isOpen }">
+        <div divide-y divide-gray-200 pt-25>
             <Navigation :entries="firstEntries" />
 
             <Suspense>
@@ -27,12 +27,6 @@
             name: "Trending",
             icon: "i-heroicons-solid-fire",
             to: "/trending",
-            active: false
-        },
-        {
-            name: "Subscriptions",
-            icon: "i-heroicons-solid-chart-bar",
-            to: "/subscriptions",
             active: false
         }
     ];
