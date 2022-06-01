@@ -1,6 +1,6 @@
 <template>
-    <aside shadow-lg scrollbar="~ rounded" h-screen overflow-auto fixed top-0 bg-white z-20 divide-y divide-gray-200 :class="{ 'w-64': isOpen }">
-        <div divide-y divide-gray-200 pt-25>
+    <aside scrollbar="~ thumb-color-zinc-400 rounded" max-h-custom-screen fixed top-80px bg-white z-20 divide-y divide-gray-200 :class="{ 'w-64': isOpen }">
+        <div divide-y divide-gray-200>
             <Navigation :entries="firstEntries" />
 
             <Suspense>

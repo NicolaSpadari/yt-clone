@@ -6,6 +6,7 @@ import '@vue/runtime-core'
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Banner: typeof import('./src/components/Banner.vue')['default']
+    ChannelHeading: typeof import('./src/components/ChannelHeading.vue')['default']
     ChannelVideoItem: typeof import('./src/components/ChannelVideoItem.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     Logo: typeof import('./src/components/Logo.vue')['default']
@@ -16,6 +17,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     Sidebar: typeof import('./src/components/Sidebar.vue')['default']
     UserSubscriptions: typeof import('./src/components/UserSubscriptions.vue')['default']
+    VideoComments: typeof import('./src/components/VideoComments.vue')['default']
     VideoItem: typeof import('./src/components/VideoItem.vue')['default']
   }
 }

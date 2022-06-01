@@ -18,6 +18,11 @@ const useYoutube = () => {
         subscriptions.value.push(...data.value.items);
     };
 
+    const getDislikes = async(videoId: string, likes: number) => {
+        const { data } = await useFetch(`https://returnyoutubedislikeapi.com/Votes?videoId=${videoId}&likeCount=${likes}`).get().json();
+        return data.value.dislikes;
+    }
+
     const isSubscribed = (channelId: string) => {
         return subscriptions.value.some((sub) => sub.snippet.resourceId.channelId === channelId)
     }
@@ -25,7 +30,8 @@ const useYoutube = () => {
     return {
         subscriptions,
         fetchSubscriptions,
-        isSubscribed
+        isSubscribed,
+        getDislikes
     };
 };
 

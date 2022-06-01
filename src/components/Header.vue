@@ -1,8 +1,8 @@
 <template>
-    <div fixed w-full z-30 transition-shadow duration-300 :class="{ 'shadow-lg': throttledScroll > 0 }">
-        <div flex justify-between w-full bg-white bg-opacity-60 backdrop-filter backdrop-blur>
+    <div fixed w-full z-30 transition-shadow duration-300 shadow>
+        <div flex justify-between w-full bg-white bg-opacity-60 backdrop-filter backdrop-blur :class="signedIn ? 'py-3' : ''">
             <div flex space-x-6 lg="w-1/4">
-                <div flex items-center pl-4 space-x-3 xl="w-64 bg-white">
+                <div flex items-center pl-4 space-x-3 xl="w-64">
                     <button i-heroicons-outline-menu w-6 h-6 focus="outline-none" @click="toggleSidebar()" />
                     <RouterLink to="/">
                         <Logo w-20 />
@@ -35,22 +35,22 @@
 
                     <i-heroicons-solid-user-circle w-5 h-5 />
                 </button>
-                <button v-else inline-flex items-center px-5 py-3 text-blue-500 border border-blue-500 rounded hover:bg-blue-500 hover:text-white active:bg-blue-500 focus:outline-none focus:ring space-x-2 @click="logout()">
-                    <span text-sm>
-                        {{ user.user.displayName }}
-                    </span>
 
-                    <i-heroicons-solid-logout w-5 h-5 />
-                </button>
+                <div v-else flex items-start items-center space-x-3>
+                    <img v-lazyload :data-src="user.user.photoURL" rounded-full h-9 w-9 :alt="user.user.displayName" referrerpolicy="no-referrer">
+                    <div text-sm>
+                        <p font-semibold text-gray-800>
+                            {{ user.user.displayName }}
+                        </p>
+                    </div>
+                    <button i-heroicons-outline-logout w-5 h-5 text-dark-800 @click="logout()" />
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-    const { y } = useWindowScroll();
-    const scrolled = ref(0);
-    const throttledScroll = refThrottled(scrolled, 500);
     const { toggleSidebar } = useSidebar();
     const { user, login, logout, signedIn } = useUser();
     const router = useRouter();
@@ -64,8 +64,4 @@
             }
         });
     };
-
-    watch(y, () => {
-        scrolled.value = y.value;
-    });
 </script>

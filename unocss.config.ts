@@ -12,7 +12,9 @@ import {
 import { presetScrollbar } from "unocss-preset-scrollbar";
 
 export default defineConfig({
-    shortcuts: [],
+    shortcuts: {
+        "max-h-custom-screen": "max-h-[calc(100vh-80px)] overflow-y-scroll"
+    },
     safelist: [
         "i-heroicons-solid-home",
         "i-heroicons-solid-fire",
@@ -22,7 +24,12 @@ export default defineConfig({
         presetUno(),
         presetTagify(),
         presetAttributify(),
-        presetIcons(),
+        presetIcons({
+            extraProperties: {
+                "display": "inline-block",
+                "vertical-align": "middle"
+            }
+        }),
         presetScrollbar(),
         presetTypography(),
         presetWebFonts({

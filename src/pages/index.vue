@@ -5,7 +5,7 @@
 </route>
 
 <template>
-    <div ref="container" m-auto max-w-screen-2xl grid gap-4 sm="grid-cols-2" lg="grid-cols-3" xl="grid-cols-4" uw="grid-cols-5">
+    <div ref="container" pt-80px max-h-screen scrollbar="~ thumb-color-zinc-400 rounded" container grid gap-4 px-5 sm="grid-cols-2" lg="grid-cols-3" xl="grid-cols-4" xxl="grid-cols-5" uw="grid-cols-6">
         <template v-if="loading">
             Loading...
         </template>
@@ -46,17 +46,18 @@
 
             nextPage.value = data.value.nextPageToken;
             videos.value.push(...data.value.items);
+            await fetchVideoThumbnails(data.value.items.map((video: any) => video.snippet.channelId));
             loading.value = isFetching.value;
         } catch (err) {
             console.error(err);
         }
     };
 
-    const fetchVideoThumbnails = async () => {
+    const fetchVideoThumbnails = async (ids: string[]) => {
         try {
             const { data } = await useFetchYT("channels?" + new URLSearchParams({
                 part: "snippet",
-                id: videos.value.map((video) => video.snippet.channelId).join(","),
+                id: ids.join(","),
                 key: import.meta.env.VITE_YT_API_KEY
             })).get().json();
 
@@ -72,12 +73,9 @@
 
     onMounted(async () => {
         await fetchVideos();
-        await fetchVideoThumbnails();
     });
 
-    useInfiniteScroll(container, async () => {
-        console.log("trigger infinite scroll");
-
-        fetchVideos();
-    });
+    // useInfiniteScroll(container, async () => {
+    //     await fetchVideos();
+    // });
 </script>

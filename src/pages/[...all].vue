@@ -5,9 +5,9 @@
 </route>
 
 <template>
-    <div container>
+    <container>
         <p>404 page</p>
-    </div>
+    </container>
 </template>
 
 <script lang="ts" setup>

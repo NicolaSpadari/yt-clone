@@ -2,7 +2,7 @@
     <Header />
     <Sidebar />
 
-    <main px-5 pb-5 pt-27 :class="isOpen ? 'ml-64' : 'ml-14'">
+    <main :class="isOpen ? 'ml-64' : 'ml-14'">
         <router-view v-slot="{ Component }">
             <Suspense>
                 <component :is="Component" />
@@ -30,7 +30,7 @@
         -webkit-user-drag: none;
         @apply select-none;
     }
-    container {
+    [container] {
         @apply mx-auto;
     }
 

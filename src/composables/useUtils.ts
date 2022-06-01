@@ -8,6 +8,10 @@ const useUtils = () => {
         return formatter.format(num);
     };
 
+    const dotNumber = (number: string | number) => {
+        return Number(number).toLocaleString();
+    }
+
     const shorten = (text: string, len = 50) => {
         if (text.length >= len) {
             return text.slice(0, len) + "...";
@@ -17,16 +21,23 @@ const useUtils = () => {
     };
 
     const escape = (html: string) => {
-        const div = document.createElement("div");
-        div.innerText = html;
-        return div.innerHTML;
+        const txt = document.createElement("textarea");
+        txt.innerHTML = html;
+        return txt.value;
+    };
+
+    const enrichText = (text: string) => {
+        const URLMatcher = /(?:(?:https):\/\/|www\.)(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[A-Z0-9+&@#/%=~_|$])/igm;
+        return text.replace(/\n/g, "<br>").replace(URLMatcher, (match: any) => `<a href="${match}" target="_blank">${match}</a>`);
     };
 
     return {
         getReadableDate,
         formatNumber,
+        dotNumber,
         shorten,
-        escape
+        escape,
+        enrichText
     };
 };
 
