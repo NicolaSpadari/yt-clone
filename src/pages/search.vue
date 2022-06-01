@@ -1,9 +1,14 @@
 <template>
     <div container pt-80px>
-        <p text-dark-800 text-xl mt-10>Results for: <span font-bold italic>{{ $route.query.search_query }}</span></p>
+        <p text-dark-800 text-xl mt-10>
+            Results for: <span font-bold italic>{{ $route.query.search_query }}</span>
+        </p>
 
         <div mt-10>
-            <VideoItemHorizontal v-for="video in videos" :key="video.id.videoId" :data="video" />
+            <template v-for="video in videos">
+                <ChannelItem v-if="video.id.kind === 'youtube#channel'" :key="video.id.videoId" :data="video" />
+                <VideoItemHorizontal v-else :key="video.id.videoId" :data="video" />
+            </template>
         </div>
     </div>
 </template>

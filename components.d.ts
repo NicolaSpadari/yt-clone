@@ -8,6 +8,7 @@ declare module '@vue/runtime-core' {
     Alert: typeof import('./src/components/Alert.vue')['default']
     Banner: typeof import('./src/components/Banner.vue')['default']
     ChannelHeading: typeof import('./src/components/ChannelHeading.vue')['default']
+    ChannelItem: typeof import('./src/components/ChannelItem.vue')['default']
     ChannelVideoItem: typeof import('./src/components/ChannelVideoItem.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     Logo: typeof import('./src/components/Logo.vue')['default']
