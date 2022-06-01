@@ -77,7 +77,7 @@
         await fetchVideos();
     });
 
-    // useInfiniteScroll(container, async () => {
-    //     await fetchVideos();
-    // });
+    useInfiniteScroll(container, async () => {
+        await fetchVideos();
+    });
 </script>
