@@ -33,32 +33,5 @@
         channelThumbnail: String
     });
 
-    const { formatNumber, shorten, getReadableDate } = useUtils();
-
-    const getVideoDuration = (durationISO: string) => {
-        let match = durationISO.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-
-        match = match?.slice(1).map((x) => {
-            if (x != null) {
-                return x.replace(/\D/, "");
-            }
-            return null;
-        }) as RegExpMatchArray;
-
-        const hours = (parseInt(match[0]) || 0);
-        const minutes = (parseInt(match[1]) || 0);
-        const seconds = (parseInt(match[2]) || 0);
-
-        const totalSeconds = hours * 3600 + minutes * 60 + seconds;
-        const durationObj = intervalToDuration({ start: 0, end: totalSeconds * 1000 });
-
-        if (durationObj.hours && durationObj.hours > 0) {
-            return `${durationObj.hours}:${durationObj.minutes}:${durationObj.seconds}`;
-        }
-        if (durationObj.minutes && durationObj.minutes > 0) {
-            return `${durationObj.minutes}:${durationObj.seconds}`;
-        }
-
-        return `0:${durationObj.seconds}`;
-    };
+    const { formatNumber, shorten, getReadableDate, getVideoDuration } = useUtils();
 </script>

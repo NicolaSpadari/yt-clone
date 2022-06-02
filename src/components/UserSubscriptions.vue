@@ -6,7 +6,7 @@
             >
                 <i-heroicons-solid-chart-bar w-5 h-5 />
 
-                <span v-show="isOpen" class="font-medium text-sm ml-5">
+                <span class="font-medium text-sm ml-5">
                     Subscriptions
                     <span text-xs font-normal>({{ subscriptions.length }})</span>
                 </span>
@@ -14,7 +14,7 @@
                 <span
                     class="ml-auto transition duration-300 shrink-0"
                 >
-                    <i-heroicons-solid-chevron-right v-show="isOpen" w-5 h-5 transition-transform duration-250 class="group-open:rotate-90" />
+                    <i-heroicons-solid-chevron-right w-5 h-5 transition-transform duration-250 class="group-open:rotate-90" />
                 </span>
             </summary>
 
@@ -27,7 +27,7 @@
                 >
                     <img v-lazyload w-5 h-5 rounded-full :data-src="channel.snippet.thumbnails.default.url" :alt="channel.snippet.title">
 
-                    <span v-show="isOpen" class="font-medium text-sm ml-3"> {{ channel.snippet.title }} </span>
+                    <span class="font-medium text-sm ml-3"> {{ channel.snippet.title }} </span>
                 </RouterLink>
             </nav>
         </details>

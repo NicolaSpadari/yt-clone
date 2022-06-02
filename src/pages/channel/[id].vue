@@ -35,6 +35,7 @@
             pageToken: pageToken.value,
             key: import.meta.env.VITE_YT_API_KEY
         })).get().json();
+        pageToken.value = data.value.nextPageToken;
         channelVideos.value.push(...data.value.items);
     };
 

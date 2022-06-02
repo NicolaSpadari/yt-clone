@@ -8,7 +8,11 @@
     <div ref="container" pt-100px max-h-screen scrollbar="~ thumb-color-zinc-400 rounded">
         <div container grid gap-4 px-5 sm="grid-cols-2" lg="grid-cols-3" xl="grid-cols-4" xxl="grid-cols-5" uw="grid-cols-6">
             <template v-if="loading">
-                Loading...
+                <div col-span-full flex>
+                    <div mx-auto my-15>
+                        <Loader w-10 h-10 text-blue-500 animate-spin />
+                    </div>
+                </div>
             </template>
 
             <template v-else>

@@ -1,45 +1,43 @@
 <template>
-    <div max-w-5xl>
-        <section rounded-lg bg-gray-100 p-8>
-            <div grid gap-12 grid-cols-1 sm="grid-cols-3 items-center">
-                <div relative>
-                    <RouterLink :to="`/watch?v=${props.data.id.videoId}`" aspect-video>
-                        <img
-                            v-lazyload
-                            :data-src="props.data.snippet.thumbnails.medium.url"
-                            :alt="props.data.snippet.title"
-                            :title="props.data.snippet.title"
-                            rounded-lg object-cover
-                        >
-                    </RouterLink>
+    <section rounded-lg bg-gray-100 p-8>
+        <div grid gap-12 grid-cols-1 sm="grid-cols-3 items-center">
+            <div relative>
+                <RouterLink :to="`/watch?v=${props.data.id.videoId}`" aspect-video>
+                    <img
+                        v-lazyload
+                        :data-src="props.data.snippet.thumbnails.medium.url"
+                        :alt="props.data.snippet.title"
+                        :title="props.data.snippet.title"
+                        rounded-lg object-cover
+                    >
+                </RouterLink>
 
-                    <div bg-white rounded-lg shadow-xl py-2 px-4 right--4 bottom--4 absolute inline-flex>
-                        <i-heroicons-solid-play w-5 h-5 text-red-500 />
-                    </div>
+                <div bg-white rounded-lg shadow-xl py-2 px-4 right--4 bottom--4 absolute inline-flex>
+                    <i-heroicons-solid-play w-5 h-5 text-red-500 />
                 </div>
-
-                <blockquote space-y-8 sm="col-span-2">
-                    <cite items-center not-italic>
-                        <p text-sm text-gray-500>
-                            <RouterLink :to="`/watch?v=${props.data.id.videoId}`" font-bold>
-                                {{ shorten(props.data.snippet.title, 60) }}
-                            </RouterLink>
-                            &middot;
-                            <RouterLink :to="`/channel/${props.data.snippet.channelId}`" hover="underline">
-                                {{ props.data.snippet.channelTitle }}
-                            </RouterLink>
-                        </p>
-                        <p text-sm text-gray-500>
-                            Published {{ getReadableDate(props.data.snippet.publishedAt) }} ago
-                        </p>
-                    </cite>
-                    <p text-sm text-gray-600>
-                        {{ props.data.snippet.description }}
-                    </p>
-                </blockquote>
             </div>
-        </section>
-    </div>
+
+            <blockquote space-y-8 sm="col-span-2">
+                <cite items-center not-italic>
+                    <p text-sm text-gray-500>
+                        <RouterLink :to="`/watch?v=${props.data.id.videoId}`" font-bold>
+                            {{ shorten(props.data.snippet.title, 60) }}
+                        </RouterLink>
+                        &middot;
+                        <RouterLink :to="`/channel/${props.data.snippet.channelId}`" hover="underline">
+                            {{ props.data.snippet.channelTitle }}
+                        </RouterLink>
+                    </p>
+                    <p text-sm text-gray-500>
+                        Published {{ getReadableDate(props.data.snippet.publishedAt) }} ago
+                    </p>
+                </cite>
+                <p text-sm text-gray-600>
+                    {{ props.data.snippet.description }}
+                </p>
+            </blockquote>
+        </div>
+    </section>
 </template>
 
 <script lang="ts" setup>

@@ -1,5 +1,5 @@
 <template>
-    <article rounded-lg border-1 border-gray-100 max-w-5xl p-4 sm="p-8">
+    <article rounded-lg border-1 border-gray-100 p-4 sm="p-8">
         <div flex items-center space-x-4 lg="items-start space-x-8">
             <RouterLink
                 :to="`/channel/${props.data.id.channelId}`"

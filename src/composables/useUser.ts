@@ -18,10 +18,12 @@ const useUser = () => {
 
     const logout = async() => {
         const { subscriptions } = useYoutube();
+        const router = useRouter();
 
         await auth.signOut();
         user.value = { user: null };
         subscriptions.value = [];
+        router.push("/");
     };
 
     return {

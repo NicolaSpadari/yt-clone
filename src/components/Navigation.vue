@@ -5,10 +5,11 @@
             :key="entry.name"
             :to="entry.to"
             rounded-lg flex py-2 items-center space-x-5 px-4 text-gray-800 hover="bg-gray-100"
+            @click="toggleSidebar()"
         >
             <span :class="entry.icon" class="icon" w-5 h-5 />
 
-            <span v-show="isOpen" font-medium text-sm>
+            <span font-medium text-sm>
                 {{ entry.name }}
             </span>
         </RouterLink>
@@ -16,11 +17,11 @@
 </template>
 
 <script lang="ts" setup>
-    const { isOpen } = useSidebar();
-
     const props = defineProps({
         entries: Object
     });
+
+    const { toggleSidebar } = useSidebar();
 </script>
 
 <style lang="scss" scoped>

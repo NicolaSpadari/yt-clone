@@ -1,6 +1,6 @@
 <template>
     <div rounded-lg p-6 bg-gray-50>
-        <div flex justify-between>
+        <div flex flex-col justify-between space-y-5 lg="flex-row space-y-0">
             <div class="flex space-x-4 mt-3 items-start">
                 <img v-lazyload border-2 border-gray-200 shadow-md :data-src="props.channel.snippet.thumbnails.medium.url" class="rounded-full h-16 w-16" :alt="props.channel.snippet.title">
                 <div class="text-sm">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div flex items-center>
+            <div flex justify-center items-center>
                 <RevealButton v-if="isSubscribed(props.channel.id)" bg-red-500 text-white>
                     <template #front>
                         <div flex space-x-3>

@@ -38,8 +38,8 @@
 
                 <div v-else flex items-start items-center space-x-3>
                     <img v-lazyload :data-src="user.user.photoURL" rounded-full h-9 w-9 :alt="user.user.displayName" referrerpolicy="no-referrer">
-                    <div text-sm>
-                        <p font-semibold text-gray-800>
+                    <div hidden lg="block ml-3">
+                        <p font-semibold text-gray-800 text-sm>
                             {{ user.user.displayName }}
                         </p>
                     </div>
