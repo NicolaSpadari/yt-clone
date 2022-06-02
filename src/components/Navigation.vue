@@ -4,10 +4,9 @@
             v-for="entry in props.entries"
             :key="entry.name"
             :to="entry.to"
-            rounded-lg flex py-2 items-center space-x-5
-            :class="[entry.active ? 'bg-gray-100 text-gray-700' : 'text-gray-800 hover:bg-gray-100', isOpen ? 'pr-4 pl-6' : 'px-4']"
+            rounded-lg flex py-2 items-center space-x-5 px-4 text-gray-800 hover="bg-gray-100"
         >
-            <span w-5 h-5 :class="entry.active ? `text-red-500 ${entry.icon}` : entry.icon" />
+            <span :class="entry.icon" class="icon" w-5 h-5 />
 
             <span v-show="isOpen" font-medium text-sm>
                 {{ entry.name }}
@@ -23,3 +22,13 @@
         entries: Object
     });
 </script>
+
+<style lang="scss" scoped>
+    .router-link-exact-active{
+        @apply bg-gray-100 text-gray-700;
+
+        .icon{
+            @apply text-red-500;
+        }
+    }
+</style>

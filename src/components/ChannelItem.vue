@@ -1,29 +1,36 @@
 <template>
-    <div flex space-x-5 mb-7>
-        <RouterLink :to="`/channel/${props.data.id.channelId}`" class="group">
-            <img v-lazyload :data-src="props.data.snippet.thumbnails.medium.url" :title="props.data.snippet.title" rounded-full w-36 h-36>
-        </RouterLink>
-        <div mt-3>
-            <div text-sm space-y-2>
-                <RouterLink :to="`/channel/${props.data.id.channelId}`" font-semibold text-gray-800>
+    <article rounded-lg border-1 border-gray-100 max-w-5xl p-4 sm="p-8">
+        <div flex items-center space-x-4 lg="items-start space-x-8">
+            <RouterLink
+                :to="`/channel/${props.data.id.channelId}`"
+                rounded-full h-26 grid w-26 place-content-center shrink-0
+            >
+                <img v-lazyload rounded-full :data-src="props.data.snippet.thumbnails.medium.url" :title="props.data.snippet.title" :alt="props.data.snippet.title">
+            </RouterLink>
+
+            <div>
+                <RouterLink :to="`/channel/${props.data.id.channelId}`" font-medium text-lg lg="text-xl">
                     {{ shorten(props.data.snippet.title, 60) }}
                 </RouterLink>
-                <RouterLink :to="`/channel/${props.data.snippet.channelId}`" flex mt-1>
-                    <div relative>
-                        <div flex h-full items-center space-x-1>
-                            <i-heroicons-solid-desktop-computer w-5 h-5 text-red-500 />
-                            <span>{{ props.data.snippet.channelTitle }}</span>
+
+                <p v-if="props.data.snippet.description !== ''" mt-1 text-sm text-gray-700>
+                    {{ props.data.snippet.description }}
+                </p>
+
+                <div mt-2 flex gap-2 lg="items-center mt-4">
+                    <div flex flex-col text-gray-500 space-y-2 lg="flex-row">
+                        <i-heroicons-solid-desktop-computer hidden w-4 h-4 text-red-500 lg="inline-block" />
+                        <p font-medium text-xs lg="ml-1">
+                            Member since {{ getReadableDate(props.data.snippet.publishedAt) }}
+                        </p>
+                        <div mr-auto lg="hidden">
+                            <i-heroicons-solid-desktop-computer w-6 h-6 text-red-500 />
                         </div>
                     </div>
-                </RouterLink>
-                <div>Published {{ getReadableDate(props.data.snippet.publishedAt) }} ago</div>
+                </div>
             </div>
-
-            <p text-sm text-dark-400 max-w-xl mt-5>
-                {{ props.data.snippet.description }}
-            </p>
         </div>
-    </div>
+    </article>
 </template>
 
 <script lang="ts" setup>
@@ -32,32 +39,5 @@
         channelThumbnail: String
     });
 
-    const { formatNumber, shorten, getReadableDate } = useUtils();
-
-    const getVideoDuration = (durationISO: string) => {
-        let match = durationISO.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-
-        match = match?.slice(1).map((x) => {
-            if (x != null) {
-                return x.replace(/\D/, "");
-            }
-            return null;
-        }) as RegExpMatchArray;
-
-        const hours = (parseInt(match[0]) || 0);
-        const minutes = (parseInt(match[1]) || 0);
-        const seconds = (parseInt(match[2]) || 0);
-
-        const totalSeconds = hours * 3600 + minutes * 60 + seconds;
-        const durationObj = intervalToDuration({ start: 0, end: totalSeconds * 1000 });
-
-        if (durationObj.hours && durationObj.hours > 0) {
-            return `${durationObj.hours}:${durationObj.minutes}:${durationObj.seconds}`;
-        }
-        if (durationObj.minutes && durationObj.minutes > 0) {
-            return `${durationObj.minutes}:${durationObj.seconds}`;
-        }
-
-        return `0:${durationObj.seconds}`;
-    };
+    const { shorten, getReadableDate } = useUtils();
 </script>

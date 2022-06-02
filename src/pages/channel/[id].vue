@@ -1,5 +1,5 @@
 <template>
-    <div ref="container" pt-80px max-h-screen scrollbar="~ thumb-color-zinc-400 rounded">
+    <div ref="container" pt-100px max-h-screen scrollbar="~ thumb-color-zinc-400 rounded">
         <div container space-y-10>
             <Banner :image="channel.brandingSettings.image.bannerExternalUrl" />
 

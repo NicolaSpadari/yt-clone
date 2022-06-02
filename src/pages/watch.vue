@@ -1,5 +1,5 @@
 <template>
-    <div container pt-80px space-y-5>
+    <div container pt-100px space-y-5 px-5>
         <div rounded-lg overflow-hidden>
             <vue-plyr ref="plyr">
                 <div class="plyr__video-embed">
@@ -13,23 +13,38 @@
             </vue-plyr>
         </div>
 
-        <div container space-y-10>
+        <div container max-w-6xl space-y-10>
             <div flex justify-between>
                 <div border-l-4 border-gray-400 pl-4 py-2 space-y-1>
                     <div flex space-x-4 items-center>
                         <RouterLink :to="`/channel/${channel.id}`">
                             <img v-lazyload rounded-full :data-src="channel.snippet.thumbnails.default.url" :alt="channel.brandingSettings.channel.title" w-16 h-16>
                         </RouterLink>
-                        <div>
-                            <RouterLink :to="`/channel/${channel.id}`" font-medium text-base>
-                                {{ channel.brandingSettings.channel.title }}
-                            </RouterLink>
+                        <div max-w-3xl>
+                            <div flex items-center space-x-3>
+                                <RouterLink :to="`/channel/${channel.id}`" font-medium text-base>
+                                    {{ channel.brandingSettings.channel.title }}
+                                </RouterLink>
+
+                                <template v-if="!channel.statistics.hiddenSubscriberCount">
+                                    <span>&middot;</span>
+                                    <p text-gray-600 text-sm>
+                                        {{ formatNumber(channel.statistics.subscriberCount) }} subscribers
+                                    </p>
+                                </template>
+                            </div>
                             <p font-bold text-2xl>
                                 {{ video.snippet.title }}
                             </p>
-                            <p text-sm text-gray-600>
-                                Published on {{ getPublishDate(video.snippet.publishedAt) }}
-                            </p>
+                            <div flex space-x-3 items-center>
+                                <p text-sm text-gray-600>
+                                    Published on {{ getPublishDate(video.snippet.publishedAt) }}
+                                </p>
+                                <span>&middot;</span>
+                                <p text-gray-600 text-sm>
+                                    {{ formatNumber(channel.statistics.viewCount) }} views
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -70,7 +85,7 @@
 <script lang="ts" setup>
     const route = useRoute();
     const { showAlert } = useAlert();
-    const { enrichText, dotNumber, shareVideo, getPublishDate } = useUtils();
+    const { enrichText, dotNumber, formatNumber, shareVideo, getPublishDate } = useUtils();
     const { getDislikes } = useYoutube();
     const video = ref();
     const channel = ref();

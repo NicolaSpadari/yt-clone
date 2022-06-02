@@ -13,7 +13,7 @@ import { presetScrollbar } from "unocss-preset-scrollbar";
 
 export default defineConfig({
     shortcuts: {
-        "max-h-custom-screen": "max-h-[calc(100vh-80px)] overflow-y-scroll"
+        "max-h-custom-screen": "max-h-[calc(100vh-100px)] overflow-y-scroll"
     },
     safelist: [
         "i-heroicons-solid-home",

@@ -24,9 +24,9 @@
             active: true
         },
         {
-            name: "Trending",
-            icon: "i-heroicons-solid-fire",
-            to: "/trending",
+            name: "Search",
+            icon: "i-heroicons-solid-search",
+            to: "/search",
             active: false
         }
     ];

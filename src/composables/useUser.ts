@@ -5,7 +5,8 @@ const useUser = () => {
     const login = async() => {
         try {
             const provider = new GoogleAuthProvider();
-            provider.addScope("https://www.googleapis.com/auth/youtube.readonly")
+            provider.addScope("https://www.googleapis.com/auth/youtube.readonly");
+            provider.addScope("https://www.googleapis.com/auth/youtube");
 
             const result = await signInWithPopup(auth, provider);
 
@@ -16,8 +17,11 @@ const useUser = () => {
     };
 
     const logout = async() => {
+        const { subscriptions } = useYoutube();
+
         await auth.signOut();
         user.value = { user: null };
+        subscriptions.value = [];
     };
 
     return {
