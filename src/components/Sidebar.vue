@@ -9,7 +9,7 @@
                 <div flex max-w-full inset-y-0 left-0 pointer-events-none fixed>
                     <Transition name="slide">
                         <div v-show="isOpen" max-w-sm w-screen transform pointer-events-auto>
-                            <aside bg-white flex flex-col h-full shadow-xl>
+                            <aside ref="panel" bg-white flex flex-col h-full shadow-xl>
                                 <div max-h-custom-screen pt-100px scrollbar="~ thumb-color-zinc-400 rounded">
                                     <div flex-1>
                                         <Navigation :entries="firstEntries" />
@@ -31,21 +31,26 @@
 </template>
 
 <script lang="ts" setup>
-    const { isOpen } = useSidebar();
+    const { toggleSidebar, isOpen } = useSidebar();
     const { signedIn } = useUser();
+    const panel = ref<HTMLElement | null>(null);
+
+    onClickOutside(panel, (e) => {
+        if (e.target.id !== "sidebar-toggle") {
+            toggleSidebar();
+        }
+    });
 
     const firstEntries = [
         {
             name: "Home",
             icon: "i-heroicons-solid-home",
-            to: "/",
-            active: true
+            to: "/"
         },
         {
             name: "Search",
             icon: "i-heroicons-solid-search",
-            to: "/search",
-            active: false
+            to: "/search"
         }
     ];
 
@@ -53,14 +58,7 @@
         {
             name: "Channels",
             icon: "i-heroicons-solid-folder",
-            to: "/channels",
-            active: false
-        },
-        {
-            name: "Settings",
-            icon: "i-heroicons-solid-cog",
-            to: "/settings",
-            active: false
+            to: "/channels"
         }
     ];
 </script>

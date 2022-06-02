@@ -3,7 +3,7 @@
         <div flex justify-between w-full bg-white bg-opacity-60 backdrop-filter backdrop-blur :class="signedIn ? 'py-3' : ''">
             <div flex space-x-6 lg="w-1/4">
                 <div flex items-center pl-4 space-x-3 xl="w-64">
-                    <button i-heroicons-outline-menu w-6 h-6 focus="outline-none" @click="toggleSidebar()" />
+                    <button id="sidebar-toggle" :class="isOpen ? 'i-heroicons-outline-x' : 'i-heroicons-outline-menu'" w-6 h-6 @click="toggleSidebar()" />
                     <RouterLink to="/">
                         <Logo w-20 />
                     </RouterLink>
@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts" setup>
-    const { toggleSidebar } = useSidebar();
+    const { toggleSidebar, isOpen } = useSidebar();
     const { user, login, logout, signedIn } = useUser();
     const router = useRouter();
     const searchTerm = ref("");
