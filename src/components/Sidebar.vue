@@ -9,7 +9,7 @@
                 <div flex max-w-full inset-y-0 left-0 pointer-events-none fixed>
                     <Transition name="slide">
                         <div v-show="isOpen" max-w-sm w-screen transform pointer-events-auto>
-                            <aside ref="panel" bg-white flex flex-col h-full shadow-xl>
+                            <aside bg-white flex flex-col h-full shadow-xl>
                                 <div max-h-custom-screen pt-100px scrollbar="~ thumb-color-zinc-400 rounded">
                                     <div flex-1>
                                         <Navigation :entries="firstEntries" />
@@ -31,12 +31,11 @@
 </template>
 
 <script lang="ts" setup>
-    const { toggleSidebar, isOpen } = useSidebar();
+    const { isOpen, toggleSidebar } = useSidebar();
     const { signedIn } = useUser();
-    const panel = ref<HTMLElement | null>(null);
 
-    onClickOutside(panel, (e) => {
-        if (e.target.id !== "sidebar-toggle") {
+    onKeyStroke("Escape", () => {
+        if (isOpen.value) {
             toggleSidebar();
         }
     });
