@@ -68,7 +68,7 @@ const useUtils = () => {
     };
 
     const enrichText = (text: string) => {
-        const URLMatcher = /(?:(?:https):\/\/|www\.)(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[A-Z0-9+&@#/%=~_|$])/igm;
+        const URLMatcher = /(?:(?:https|http):\/\/|www\.)(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[A-Z0-9+&@#/%=~_|$])/igm;
         return text.replace(/\n/g, "<br>").replace(URLMatcher, (match: any) => `<a href="${match}" target="_blank">${match}</a>`);
     };
 
