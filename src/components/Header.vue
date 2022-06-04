@@ -43,7 +43,7 @@
                     </button>
                     <Dropdown :open="dropdownOpen">
                         <DropdownEntry>
-                            <RouterLink :to="`/channel/${userChannel.id}`">
+                            <RouterLink :key="signedIn" :to="`/channel/${userChannel.id}`">
                                 {{ user.user.displayName }}
                             </RouterLink>
                         </DropdownEntry>

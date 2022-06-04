@@ -5,27 +5,30 @@ const useUser = () => {
     const login = async() => {
         const { getUserChannel } = useYoutube();
 
+        watchOnce(user, async() => {
+            await getUserChannel();
+        });
+
         try {
             const provider = new GoogleAuthProvider();
             provider.addScope("https://www.googleapis.com/auth/youtube.readonly");
+            provider.addScope("https://www.googleapis.com/auth/youtube");
 
             const result = await signInWithPopup(auth, provider);
 
-            user.value = result as unknown as User;
-            await getUserChannel();
+            user.value = result;
         } catch (err) {
             console.error(err);
         }
     };
 
     const logout = async() => {
-        const { subscriptions } = useYoutube();
-        const router = useRouter();
+        const { subscriptions, userChannel } = useYoutube();
 
         await auth.signOut();
         user.value = { user: null };
         subscriptions.value = [];
-        router.push("/");
+        userChannel.value = { userChannel: null };
     };
 
     return {

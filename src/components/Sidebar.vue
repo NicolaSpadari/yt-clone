@@ -15,7 +15,7 @@
                                         <Navigation :entries="firstEntries" />
 
                                         <Suspense>
-                                            <UserSubscriptions v-if="signedIn" />
+                                            <UserSubscriptions v-if="signedIn" :key="signedIn" />
                                         </Suspense>
 
                                         <Navigation :entries="secondEntries" />
