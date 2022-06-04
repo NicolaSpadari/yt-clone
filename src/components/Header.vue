@@ -37,14 +37,22 @@
                     <i-heroicons-solid-user-circle w-5 h-5 />
                 </button>
 
-                <div v-else flex items-start items-center space-x-3>
-                    <img v-lazyload :data-src="user.user.photoURL" rounded-full h-9 w-9 :alt="user.user.displayName" referrerpolicy="no-referrer">
-                    <div hidden lg="block ml-3">
-                        <p font-semibold text-gray-800 text-sm>
-                            {{ user.user.displayName }}
-                        </p>
-                    </div>
-                    <button i-heroicons-outline-logout w-5 h-5 text-dark-800 @click="logout()" />
+                <div v-else>
+                    <button ref="dropdownToggle" @click="dropdownOpen = !dropdownOpen">
+                        <img v-lazyload :data-src="user.user.photoURL" rounded-full h-9 w-9 :alt="user.user.displayName" referrerpolicy="no-referrer">
+                    </button>
+                    <Dropdown :open="dropdownOpen">
+                        <DropdownEntry>
+                            <RouterLink :to="`/channel/${userChannel.id}`">
+                                {{ user.user.displayName }}
+                            </RouterLink>
+                        </DropdownEntry>
+                        <DropdownEntry>
+                            <button @click="logout()">
+                                Logout
+                            </button>
+                        </DropdownEntry>
+                    </Dropdown>
                 </div>
             </div>
         </div>
@@ -54,8 +62,15 @@
 <script lang="ts" setup>
     const { toggleSidebar, isOpen } = useSidebar();
     const { user, login, logout, signedIn } = useUser();
+    const { userChannel } = useYoutube();
     const router = useRouter();
     const searchTerm = ref("");
+    const dropdownOpen = ref(false);
+    const dropdownToggle = ref<HTMLElement | null>(null);
+
+    onClickOutside(dropdownToggle, () => {
+        dropdownOpen.value = false;
+    });
 
     const search = () => {
         router.push({
@@ -65,4 +80,6 @@
             }
         });
     };
+
+    console.log("user channel: ", userChannel.value);
 </script>

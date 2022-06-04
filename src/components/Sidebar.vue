@@ -34,6 +34,7 @@
     const { isOpen, toggleSidebar } = useSidebar();
     const { signedIn } = useUser();
     const panel = ref<HTMLElement | null>(null);
+    const { userChannel } = useYoutube();
 
     onClickOutside(panel, (e) => {
         if (e.target.id === "backdrop") {
@@ -62,9 +63,9 @@
 
     const secondEntries = [
         {
-            name: "Channels",
+            name: "My channel",
             icon: "i-heroicons-solid-folder",
-            to: "/channel"
+            to: `/channel/${userChannel.value.id}`
         }
     ];
 </script>

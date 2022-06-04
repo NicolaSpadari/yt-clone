@@ -1,5 +1,22 @@
 const useYoutube = () => {
     const subscriptions = useLocalStorage<any[]>("subscriptions", []);
+    const userChannel = useLocalStorage<any>("userChannel", { userChannel: null });
+
+    const getUserChannel = async() => {
+        const { user } = useUser();
+
+        const { data } = await useFetchYT("channels?" + new URLSearchParams({
+            part: "snippet,statistics,contentDetails",
+            mine: "true",
+            key: import.meta.env.VITE_YT_API_KEY
+        }), {
+            headers: {
+                Authorization: `Bearer ${user.value._tokenResponse.oauthAccessToken}`
+            }
+        }).get().json();
+
+        userChannel.value = data.value.items[0];
+    };
 
     const fetchSubscriptions = async() => {
         const { user } = useUser();
@@ -29,6 +46,8 @@ const useYoutube = () => {
 
     return {
         subscriptions,
+        userChannel,
+        getUserChannel,
         fetchSubscriptions,
         isSubscribed,
         getDislikes

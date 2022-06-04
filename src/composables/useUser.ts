@@ -3,14 +3,16 @@ const useUser = () => {
     const signedIn = computed<boolean>(() => user.value.user !== null);
 
     const login = async() => {
+        const { getUserChannel } = useYoutube();
+
         try {
             const provider = new GoogleAuthProvider();
             provider.addScope("https://www.googleapis.com/auth/youtube.readonly");
-            provider.addScope("https://www.googleapis.com/auth/youtube");
 
             const result = await signInWithPopup(auth, provider);
 
             user.value = result as unknown as User;
+            await getUserChannel();
         } catch (err) {
             console.error(err);
         }

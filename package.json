@@ -19,7 +19,7 @@
     "devDependencies": {
         "@iconify-json/heroicons-outline": "^1.1.1",
         "@iconify-json/heroicons-solid": "^1.1.1",
-        "@spada/eslint-config": "^0.3.6",
+        "@spada/eslint-config": "^0.3.8",
         "@types/node": "^17.0.36",
         "@vitejs/plugin-vue": "^2.3.3",
         "date-fns": "^2.28.0",

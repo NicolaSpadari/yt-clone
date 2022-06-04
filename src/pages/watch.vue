@@ -71,13 +71,11 @@
                 </div>
             </div>
 
-            <div class="rich-text">
-                <p max-w-4xl text-sm text-dark-600 v-html="enrichText(video.snippet.description)" />
-            </div>
+            <VideoDescription :text="video.snippet.description" />
         </div>
 
         <div>
-            <VideoComments :video-id="$route.query.v" :count="video.statistics.commentCount" mt-20 />
+            <VideoComments :video-id="$route.query.v" :count="video.statistics.commentCount" my-20 />
         </div>
     </div>
 </template>
@@ -85,7 +83,7 @@
 <script lang="ts" setup>
     const route = useRoute();
     const { showAlert } = useAlert();
-    const { enrichText, dotNumber, formatNumber, shareVideo, getPublishDate } = useUtils();
+    const { dotNumber, formatNumber, shareVideo, getPublishDate } = useUtils();
     const { getDislikes } = useYoutube();
     const video = ref();
     const channel = ref();

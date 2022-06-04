@@ -1,12 +1,14 @@
 <template>
     <div ref="container" pt-100px max-h-screen scrollbar="~ thumb-color-zinc-400 rounded">
         <div container space-y-10>
-            <Banner :image="channel.brandingSettings.image.bannerExternalUrl" />
+            <Banner v-if="channel.brandingSettings.image" :image="channel.brandingSettings.image.bannerExternalUrl" />
 
             <ChannelHeading :channel="channel" />
 
             <div ref="container" m-auto max-w-screen-2xl grid gap-4 sm="grid-cols-2" lg="grid-cols-3" xl="grid-cols-4" uw="grid-cols-5">
-                <ChannelVideoItem v-for="vid in channelVideos" :key="vid.id.videoId" :data="vid" />
+                <template v-for="vid in channelVideos" :key="vid.id.videoId">
+                    <ChannelVideoItem v-if="vid.id.kind === 'youtube#video'" :data="vid" />
+                </template>
             </div>
         </div>
     </div>

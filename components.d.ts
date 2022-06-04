@@ -10,6 +10,8 @@ declare module '@vue/runtime-core' {
     ChannelHeading: typeof import('./src/components/ChannelHeading.vue')['default']
     ChannelItem: typeof import('./src/components/ChannelItem.vue')['default']
     ChannelVideoItem: typeof import('./src/components/ChannelVideoItem.vue')['default']
+    Dropdown: typeof import('./src/components/Dropdown.vue')['default']
+    DropdownEntry: typeof import('./src/components/DropdownEntry.vue')['default']
     Header: typeof import('./src/components/Header.vue')['default']
     Loader: typeof import('./src/components/Loader.vue')['default']
     Logo: typeof import('./src/components/Logo.vue')['default']
@@ -24,6 +26,7 @@ declare module '@vue/runtime-core' {
     Spinner: typeof import('./src/components/Spinner.vue')['default']
     UserSubscriptions: typeof import('./src/components/UserSubscriptions.vue')['default']
     VideoComments: typeof import('./src/components/VideoComments.vue')['default']
+    VideoDescription: typeof import('./src/components/VideoDescription.vue')['default']
     VideoItem: typeof import('./src/components/VideoItem.vue')['default']
     VideoItemHorizontal: typeof import('./src/components/VideoItemHorizontal.vue')['default']
   }
