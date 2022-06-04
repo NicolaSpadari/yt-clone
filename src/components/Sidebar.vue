@@ -5,12 +5,12 @@
         </Transition>
 
         <div inset-0 fixed overflow-hidden :class="isOpen ? '' : 'pointer-events-none'">
-            <div inset-0 absolute overflow-hidden>
+            <div id="backdrop" inset-0 absolute overflow-hidden>
                 <div flex max-w-full inset-y-0 left-0 pointer-events-none fixed>
                     <Transition name="slide">
                         <div v-show="isOpen" max-w-sm w-screen transform pointer-events-auto>
-                            <aside bg-white flex flex-col h-full shadow-xl>
-                                <div max-h-custom-screen pt-100px scrollbar="~ thumb-color-zinc-400 rounded">
+                            <aside ref="panel" bg-white flex flex-col h-full shadow-xl>
+                                <div max-h-screen pt-100px scrollbar="~ thumb-color-zinc-400 rounded">
                                     <div flex-1>
                                         <Navigation :entries="firstEntries" />
 
@@ -33,6 +33,13 @@
 <script lang="ts" setup>
     const { isOpen, toggleSidebar } = useSidebar();
     const { signedIn } = useUser();
+    const panel = ref<HTMLElement | null>(null);
+
+    onClickOutside(panel, (e) => {
+        if (e.target.id === "backdrop") {
+            toggleSidebar();
+        }
+    });
 
     onKeyStroke("Escape", () => {
         if (isOpen.value) {
@@ -57,7 +64,7 @@
         {
             name: "Channels",
             icon: "i-heroicons-solid-folder",
-            to: "/channels"
+            to: "/channel"
         }
     ];
 </script>

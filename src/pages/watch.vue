@@ -14,15 +14,15 @@
         </div>
 
         <div container max-w-6xl space-y-10>
-            <div flex justify-between>
-                <div border-l-4 border-gray-400 pl-4 py-2 space-y-1>
-                    <div flex space-x-4 items-center>
-                        <RouterLink :to="`/channel/${channel.id}`">
+            <div flex justify-between flex-col lg="flex-row">
+                <div lg="border-l-4 border-gray-400 pl-4" py-2 space-y-1>
+                    <div flex flex-col space-y-2 lg="flex-row items-center space-x-4 space-y-0">
+                        <RouterLink :to="`/channel/${channel.id}`" border-l-4 border-gray-400 pl-4 lg="border-0 pl-0">
                             <img v-lazyload rounded-full :data-src="channel.snippet.thumbnails.default.url" :alt="channel.brandingSettings.channel.title" w-16 h-16>
                         </RouterLink>
-                        <div max-w-3xl>
+                        <div max-w-3xl pl-4 lg="pl-0">
                             <div flex items-center space-x-3>
-                                <RouterLink :to="`/channel/${channel.id}`" font-medium text-base>
+                                <RouterLink :to="`/channel/${channel.id}`" font-medium text-sm lg="text-base">
                                     {{ channel.brandingSettings.channel.title }}
                                 </RouterLink>
 
@@ -33,7 +33,7 @@
                                     </p>
                                 </template>
                             </div>
-                            <p font-bold text-2xl>
+                            <p font-bold text-lg lg="text-2xl">
                                 {{ video.snippet.title }}
                             </p>
                             <div flex space-x-3 items-center>
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div flex space-x-5 pr-10>
+                <div flex justify-end space-x-5 mt-10 lg="justify-start pr-10 mt-0">
                     <div flex items-center space-x-2>
                         <i-heroicons-outline-thumb-up w-5 h-5 text-gray-600 />
                         <p text-sm text-gray-500 font-semibold>

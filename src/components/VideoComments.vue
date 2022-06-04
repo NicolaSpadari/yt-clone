@@ -10,7 +10,7 @@
                     <RouterLink :to="`/channel/${comment.snippet.topLevelComment.snippet.authorChannelId.value}`">
                         <img v-lazyload :data-src="comment.snippet.topLevelComment.snippet.authorProfileImageUrl" rounded-full h-9 w-9 :alt="comment.snippet.topLevelComment.snippet.authorDisplayName" referrerpolicy="no-referrer">
                     </RouterLink>
-                    <div text-sm max-w-4xl>
+                    <div text-sm max-w-xs lg="max-w-4xl">
                         <p font-medium text-gray-800>
                             {{ comment.snippet.topLevelComment.snippet.authorDisplayName }}
                         </p>

@@ -4,8 +4,9 @@
             <div flex space-x-6 lg="w-1/4">
                 <div flex items-center pl-4 space-x-3 xl="w-64">
                     <button id="sidebar-toggle" :class="isOpen ? 'i-heroicons-outline-x' : 'i-heroicons-outline-menu'" w-6 h-6 @click="toggleSidebar()" />
-                    <RouterLink to="/">
-                        <Logo w-20 />
+                    <RouterLink to="/" flex items-center space-x-2>
+                        <LogoV2 w-8 h-8 text-red-500 />
+                        <span text-dark-800 font-bold text-sm>YouPlayer</span>
                     </RouterLink>
                 </div>
             </div>

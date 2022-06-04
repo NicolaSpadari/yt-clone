@@ -1,0 +1,6 @@
+<template>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 111.14 97.81">
+        <polygon fill="currentColor" points="67.64 28.33 18.57 0 18.57 56.66 67.64 28.33" />
+        <polygon fill="currentColor" points="75.11 32.79 0 76.59 36.97 97.81 111.14 53.44 75.11 32.79" />
+    </svg>
+</template>
