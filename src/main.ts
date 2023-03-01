@@ -1,9 +1,9 @@
 import { createApp } from "vue";
 import { createHead } from "@vueuse/head";
+import VuePlyr from "vue-plyr";
 import { LazyLoad } from "@/directives/lazyload";
 import { router } from "@/router";
 import App from "@/App.vue";
-import VuePlyr from "vue-plyr";
 import "@unocss/reset/tailwind.css";
 import "vue-plyr/dist/vue-plyr.css";
 import "uno.css";

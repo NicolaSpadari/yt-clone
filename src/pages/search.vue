@@ -54,21 +54,21 @@
 
     const userSearch = computed(() => route.query.search_query);
 
-    const search = async () => {
-        await fetchResults(searchTerm.value);
-    };
-
     const fetchResults = async (query: string) => {
         loading.value = true;
-        const { data } = await useFetchYT("search?" + new URLSearchParams({
+        const { data } = await useFetchYT(`search?${new URLSearchParams({
             part: "snippet",
             q: query,
             maxResults: "50",
             key: import.meta.env.VITE_YT_API_KEY
-        })).get().json();
+        })}`).get().json();
 
         videos.value = data.value.items;
         loading.value = false;
+    };
+
+    const search = async () => {
+        await fetchResults(searchTerm.value);
     };
 
     if (route.query.search_query && route.query.search_query !== "") {

@@ -1,8 +1,11 @@
 [build.environment]
-    NPM_FLAGS = "--version"
-    NODE_VERSION = "17.6.0"
+    NODE_VERSION = "16"
 
-[[redirects]]
+[build]
+    publish = "dist"
+    command = "pnpm i && pnpm run build"
+
+[redirects]
     from = "/*"
     to = "/index.html"
     status = 200

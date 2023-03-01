@@ -2,10 +2,10 @@ const useUser = () => {
     const user = useLocalStorage<User | EmptyUser>("user", { user: null });
     const signedIn = computed<boolean>(() => user.value.user !== null);
 
-    const login = async() => {
+    const login = async () => {
         const { getUserChannel } = useYoutube();
 
-        watchOnce(user, async() => {
+        watchOnce(user, async () => {
             await getUserChannel();
         });
 
@@ -22,7 +22,7 @@ const useUser = () => {
         }
     };
 
-    const logout = async() => {
+    const logout = async () => {
         const { subscriptions, userChannel } = useYoutube();
 
         await auth.signOut();

@@ -21,22 +21,22 @@
     const channelVideos = ref<any[]>([]);
     const pageToken = ref("");
 
-    const { data } = await useFetchYT("channels?" + new URLSearchParams({
+    const { data } = await useFetchYT(`channels?${new URLSearchParams({
         part: "brandingSettings,id,snippet,statistics,contentDetails",
         id: String(route.params.id),
         key: import.meta.env.VITE_YT_API_KEY
-    })).get().json();
+    })}`).get().json();
     channel.value = data.value.items[0];
 
     const fetchVideos = async () => {
-        const { data } = await useFetchYT("search?" + new URLSearchParams({
+        const { data } = await useFetchYT(`search?${new URLSearchParams({
             part: "id,snippet",
             channelId: String(route.params.id),
             maxResults: "50",
             order: "date",
             pageToken: pageToken.value,
             key: import.meta.env.VITE_YT_API_KEY
-        })).get().json();
+        })}`).get().json();
         pageToken.value = data.value.nextPageToken;
         channelVideos.value.push(...data.value.items);
     };

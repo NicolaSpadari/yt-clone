@@ -43,7 +43,7 @@
                     </button>
                     <Dropdown :open="dropdownOpen">
                         <DropdownEntry>
-                            <RouterLink :key="signedIn" :to="`/channel/${userChannel.id}`">
+                            <RouterLink :key="String(signedIn)" :to="String(`/channel/${userChannel.id}`)">
                                 {{ user.user.displayName }}
                             </RouterLink>
                         </DropdownEntry>
@@ -80,6 +80,4 @@
             }
         });
     };
-
-    console.log("user channel: ", userChannel.value);
 </script>

@@ -99,20 +99,20 @@
         }, 1000);
     });
 
-    const { data } = await useFetchYT("videos?" + new URLSearchParams({
+    const { data } = await useFetchYT(`videos?${new URLSearchParams({
         part: "id,snippet,statistics",
         id: String(route.query.v),
         key: import.meta.env.VITE_YT_API_KEY
-    })).get().json();
+    })}`).get().json();
     video.value = data.value.items[0];
 
     dislikes.value = await getDislikes(String(route.query.v), Number(video.value.statistics.likeCount));
 
-    const { data: channelData } = await useFetchYT("channels?" + new URLSearchParams({
+    const { data: channelData } = await useFetchYT(`channels?${new URLSearchParams({
         part: "brandingSettings,id,snippet,statistics,contentDetails",
         id: video.value.snippet.channelId,
         key: import.meta.env.VITE_YT_API_KEY
-    })).get().json();
+    })}`).get().json();
     channel.value = channelData.value.items[0];
 
     useHead({

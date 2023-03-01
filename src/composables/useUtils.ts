@@ -34,13 +34,13 @@ const useUtils = () => {
         const durationObj = intervalToDuration({ start: 0, end: totalSeconds * 1000 });
 
         if (durationObj.hours && durationObj.hours < 10) {
-            durationObj.hours = "0" + durationObj.hours;
+            durationObj.hours = `0${durationObj.hours}`;
         }
         if (durationObj.minutes && durationObj.minutes < 10) {
-            durationObj.minutes = "0" + durationObj.minutes;
+            durationObj.minutes = `0${durationObj.minutes}`;
         }
         if (durationObj.seconds && durationObj.seconds < 10) {
-            durationObj.seconds = "0" + durationObj.seconds;
+            durationObj.seconds = `0${durationObj.seconds}`;
         }
 
         if (durationObj.hours && durationObj.hours > 0) {
@@ -55,7 +55,7 @@ const useUtils = () => {
 
     const shorten = (text: string, len = 50) => {
         if (text.length >= len) {
-            return text.slice(0, len) + "...";
+            return `${text.slice(0, len)}...`;
         }
 
         return text;

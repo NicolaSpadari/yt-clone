@@ -1,8 +1,8 @@
 import {
     defineConfig,
-    presetTagify,
     presetAttributify,
     presetIcons,
+    presetTagify,
     presetTypography,
     presetUno,
     presetWebFonts,

@@ -38,13 +38,13 @@
 
     const fetchVideos = async () => {
         try {
-            const { data, isFetching } = await useFetchYT("videos?" + new URLSearchParams({
+            const { data, isFetching } = await useFetchYT(`videos?${new URLSearchParams({
                 part: "snippet,contentDetails,statistics",
                 chart: "mostPopular",
                 maxResults: "50",
                 pageToken: nextPage.value,
                 key: import.meta.env.VITE_YT_API_KEY
-            })).get().json();
+            })}`).get().json();
 
             nextPage.value = data.value.nextPageToken;
             videos.value.push(...data.value.items);
@@ -57,11 +57,11 @@
 
     const fetchVideoThumbnails = async (ids: string[]) => {
         try {
-            const { data } = await useFetchYT("channels?" + new URLSearchParams({
+            const { data } = await useFetchYT(`channels?${new URLSearchParams({
                 part: "snippet",
                 id: ids.join(","),
                 key: import.meta.env.VITE_YT_API_KEY
-            })).get().json();
+            })}`).get().json();
 
             videoThumbnails.value.push(...data.value.items);
         } catch (err) {

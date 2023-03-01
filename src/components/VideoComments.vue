@@ -72,7 +72,7 @@
     const loaded = ref(false);
 
     const loadComments = async () => {
-        const { data } = await useFetchYT("commentThreads?" + new URLSearchParams({
+        const { data } = await useFetchYT(`commentThreads?${new URLSearchParams({
             part: "id,snippet,replies",
             videoId: String(props.videoId),
             maxResults: "20",
@@ -80,7 +80,7 @@
             textFormat: "plainText",
             pageToken: pageToken.value,
             key: import.meta.env.VITE_YT_API_KEY
-        })).get().json();
+        })}`).get().json();
 
         pageToken.value = data.value.nextPageToken;
         comments.value.push(...data.value.items);

@@ -4,9 +4,7 @@ import Vue from "@vitejs/plugin-vue";
 import Pages from "vite-plugin-pages";
 import Components from "unplugin-vue-components/vite";
 import AutoImport from "unplugin-auto-import/vite";
-import { DirResolverHelper, dirResolver } from "vite-auto-import-resolvers";
 import UnoCSS from "@unocss/vite";
-import EnvLoader from "vite-plugin-envloader";
 
 export default defineConfig({
     resolve: {
@@ -26,12 +24,10 @@ export default defineConfig({
         Pages({
             extensions: ["vue"]
         }),
-        EnvLoader(),
         UnoCSS(),
         Components({
             deep: false
         }),
-        DirResolverHelper(),
         AutoImport({
             imports: [
                 "vue",
@@ -45,13 +41,14 @@ export default defineConfig({
                     "date-fns": ["formatDistanceToNow", "intervalToDuration", "parseISO", "format"]
                 }
             ],
-            resolvers: [dirResolver()]
+            dirs: ["./src/composables"]
         })
     ],
     server: {
         fs: {
             allow: [".."]
         },
-        host: true
+        host: true,
+        port: 3000
     }
 });
